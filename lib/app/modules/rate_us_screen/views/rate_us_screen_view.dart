@@ -10,7 +10,6 @@ import 'package:customer_app/utils/fire_store_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-
 import '../controllers/rate_us_screen_controller.dart';
 
 class RateUsScreenView extends StatelessWidget {

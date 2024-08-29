@@ -43,7 +43,10 @@ class TextFieldWidgetPrefix extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title ?? '', style: const TextStyle(color: AppColors.darkGrey06, fontFamily: AppThemData.regular)),
+                Text(title ?? '',
+                    style: const TextStyle(
+                        color: AppColors.darkGrey06,
+                        fontFamily: AppThemData.regular)),
                 const SizedBox(
                   height: 5,
                 ),
@@ -51,7 +54,9 @@ class TextFieldWidgetPrefix extends StatelessWidget {
             ),
           ),
           TextFormField(
-            validator: validator ?? (value) => value != null && value.isNotEmpty ? null : 'required'.tr,
+            validator: validator ??
+                (value) =>
+                    value != null && value.isNotEmpty ? null : 'required'.tr,
             keyboardType: textInputType ?? TextInputType.text,
             onTap: onPress,
             readOnly: readOnly ?? false,
@@ -61,35 +66,45 @@ class TextFieldWidgetPrefix extends StatelessWidget {
             inputFormatters: inputFormatters,
             style: const TextStyle(fontSize: 14),
             decoration: InputDecoration(
-                errorStyle: const TextStyle(color: Colors.red, fontFamily: AppThemData.regular),
+                errorStyle: const TextStyle(
+                    color: Colors.red, fontFamily: AppThemData.regular),
                 isDense: true,
                 filled: true,
                 enabled: enable ?? true,
                 fillColor: AppColors.white,
-                contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: prefix != null ? 0 : 10),
+                contentPadding: EdgeInsets.symmetric(
+                    vertical: 16, horizontal: prefix != null ? 0 : 10),
                 prefixIcon: prefix,
                 disabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: AppColors.white, width: 1),
+                  borderSide:
+                      const BorderSide(color: AppColors.white, width: 1),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: AppColors.white, width: 1),
+                  borderSide:
+                      const BorderSide(color: AppColors.white, width: 1),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: AppColors.white, width: 1),
+                  borderSide:
+                      const BorderSide(color: AppColors.white, width: 1),
                 ),
                 errorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: AppColors.white, width: 1),
+                  borderSide:
+                      const BorderSide(color: AppColors.white, width: 1),
                 ),
                 border: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: AppColors.white, width: 1),
+                  borderSide:
+                      const BorderSide(color: AppColors.white, width: 1),
                 ),
                 hintText: hintText.tr,
-                hintStyle: const TextStyle(fontSize: 16, color: AppColors.darkGrey04, fontFamily: AppThemData.medium)),
+                hintStyle: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.darkGrey04,
+                    fontFamily: AppThemData.medium)),
           ),
         ],
       ),

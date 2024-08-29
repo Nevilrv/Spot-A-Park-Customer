@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
 import '../controllers/refer_screen_controller.dart';
 
 class ReferScreenView extends StatelessWidget {

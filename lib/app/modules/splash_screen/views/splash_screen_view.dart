@@ -2,7 +2,6 @@ import 'package:customer_app/themes/app_colors.dart';
 import 'package:customer_app/themes/app_them_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends StatelessWidget {

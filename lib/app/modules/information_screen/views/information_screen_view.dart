@@ -20,165 +20,184 @@ class InformationScreenView extends GetView<InformationScreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.lightGrey02,
-        appBar: AppBar(
-          elevation: 0,
-          titleSpacing: 0,
-          automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: SvgPicture.asset("assets/icons/ic_arrow_left.svg")),
-          ),
-          backgroundColor: AppColors.lightGrey02,
+      backgroundColor: AppColors.lightGrey02,
+      appBar: AppBar(
+        elevation: 0,
+        titleSpacing: 0,
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: SvgPicture.asset("assets/icons/ic_arrow_left.svg")),
         ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: controller.formKey.value,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Complete Your Profile",
-                    style: TextStyle(fontSize: 20, color: AppColors.darkGrey10, fontFamily: AppThemData.bold),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  const Text(
-                    "Provide your essential details and add a profile picture to personalize your experience",
-                    style: TextStyle(color: AppColors.lightGrey10, fontFamily: AppThemData.regular),
-                  ),
-                  const SizedBox(
-                    height: 34,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      buildBottomSheet(context, controller);
-                    },
-                    child: Obx(() => Center(
-                        child: controller.profileImage.isEmpty
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(60),
-                                child: Image.asset(
-                                  Constant.userPlaceHolder,
-                                  height: Responsive.width(30, context),
-                                  width: Responsive.width(30, context),
-                                  fit: BoxFit.fill,
-                                ),
-                              )
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(60),
-                                child: Image.file(
-                                  File(controller.profileImage.value),
-                                  height: Responsive.width(30, context),
-                                  width: Responsive.width(30, context),
-                                  fit: BoxFit.fill,
-                                ),
-                              ))),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFieldWidgetPrefix(
-                    prefix: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: SvgPicture.asset(
-                        "assets/icons/ic_user.svg",
-                      ),
+        backgroundColor: AppColors.lightGrey02,
+      ),
+      body: SingleChildScrollView(
+        child: Form(
+          key: controller.formKey.value,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Complete Your Profile",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: AppColors.darkGrey10,
+                      fontFamily: AppThemData.bold),
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                const Text(
+                  "Provide your essential details and add a profile picture to personalize your experience",
+                  style: TextStyle(
+                      color: AppColors.lightGrey10,
+                      fontFamily: AppThemData.regular),
+                ),
+                const SizedBox(
+                  height: 34,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    buildBottomSheet(context, controller);
+                  },
+                  child: Obx(
+                    () => Center(
+                      child: controller.profileImage.isEmpty
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(60),
+                              child: Image.asset(
+                                Constant.userPlaceHolder,
+                                height: Responsive.width(30, context),
+                                width: Responsive.width(30, context),
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(60),
+                              child: Image.file(
+                                File(controller.profileImage.value),
+                                height: Responsive.width(30, context),
+                                width: Responsive.width(30, context),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                     ),
-                    title: "Full Name",
-                    hintText: "Enter Full Name",
-                    controller: controller.fullNameController.value,
-                    onPress: () {},
                   ),
-                  TextFieldWidgetPrefix(
-                    validator: (value) => Constant().validateEmail(value),
-                    prefix: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: SvgPicture.asset(
-                        "assets/icons/ic_email.svg",
-                      ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFieldWidgetPrefix(
+                  prefix: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      "assets/icons/ic_user.svg",
                     ),
-                    title: "Email",
-                    hintText: "Enter Email Address",
-                    controller: controller.emailController.value,
-                    onPress: () {},
                   ),
-                  MobileNumberTextField(
-                    title: "Mobile Number".tr,
-                    controller: controller.phoneNumberController.value,
-                    countryCode: controller.countryCode.value,
-                    onPress: () {},
-                  ),
-                  const Text(
-                    "Select Gender",
-                    style: TextStyle(fontFamily: AppThemData.regular, color: AppColors.darkGrey06),
-                  ),
-                  Row(
-                      children: List.generate(3, (index) {
-                    return Row(
-                      children: [
-                        Obx(() => Radio(
-                              activeColor: AppColors.darkGrey09,
-                              value: controller.genderList[index],
-                              groupValue: controller.selectedGender.value,
-                              onChanged: (value) {
-                                controller.selectedGender.value = value.toString();
-                              },
-                            )),
-                        Text(
-                          controller.genderList[index],
-                          style: const TextStyle(fontFamily: AppThemData.medium, color: AppColors.darkGrey04, fontSize: 15),
-                        ),
-                      ],
-                    );
-                  })),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFieldWidgetPrefix(
-                    validator: (value) => null,
-                    prefix: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: SvgPicture.asset(
-                        "assets/icons/ic_ticket.svg",
-                      ),
+                  title: "Full Name",
+                  hintText: "Enter Full Name",
+                  controller: controller.fullNameController.value,
+                  onPress: () {},
+                ),
+                TextFieldWidgetPrefix(
+                  validator: (value) => Constant().validateEmail(value),
+                  prefix: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      "assets/icons/ic_email.svg",
                     ),
-                    title: "Referral Code",
-                    hintText: "Enter Referral Code ",
-                    controller: controller.referralCodeController.value,
-                    onPress: () {},
                   ),
-                  const SizedBox(
-                    height: 33,
-                  ),
-                  ButtonThem.buildButton(
-                    btnHeight: 56,
-                    txtSize: 16,
-                    context,
-                    title: "Save and Continue",
-                    txtColor: AppColors.lightGrey01,
-                    bgColor: AppColors.darkGrey10,
-                    onPress: () {
-                      if (controller.formKey.value.currentState!.validate()) {
-                        controller.createAccount();
-                      }
+                  title: "Email",
+                  hintText: "Enter Email Address",
+                  controller: controller.emailController.value,
+                  onPress: () {},
+                ),
+                MobileNumberTextField(
+                  title: "Mobile Number".tr,
+                  controller: controller.phoneNumberController.value,
+                  countryCode: controller.countryCode.value,
+                  onPress: () {},
+                ),
+                const Text(
+                  "Select Gender",
+                  style: TextStyle(
+                      fontFamily: AppThemData.regular,
+                      color: AppColors.darkGrey06),
+                ),
+                Row(
+                  children: List.generate(
+                    3,
+                    (index) {
+                      return Row(
+                        children: [
+                          Obx(() => Radio(
+                                activeColor: AppColors.darkGrey09,
+                                value: controller.genderList[index],
+                                groupValue: controller.selectedGender.value,
+                                onChanged: (value) {
+                                  controller.selectedGender.value =
+                                      value.toString();
+                                },
+                              )),
+                          Text(
+                            controller.genderList[index],
+                            style: const TextStyle(
+                                fontFamily: AppThemData.medium,
+                                color: AppColors.darkGrey04,
+                                fontSize: 15),
+                          ),
+                        ],
+                      );
                     },
                   ),
-                  const SizedBox(
-                    height: 16,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextFieldWidgetPrefix(
+                  validator: (value) => null,
+                  prefix: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      "assets/icons/ic_ticket.svg",
+                    ),
                   ),
-                ],
-              ),
+                  title: "Referral Code",
+                  hintText: "Enter Referral Code ",
+                  controller: controller.referralCodeController.value,
+                  onPress: () {},
+                ),
+                const SizedBox(
+                  height: 33,
+                ),
+                ButtonThem.buildButton(
+                  btnHeight: 56,
+                  txtSize: 16,
+                  context,
+                  title: "Save and Continue",
+                  txtColor: AppColors.lightGrey01,
+                  bgColor: AppColors.darkGrey10,
+                  onPress: () {
+                    if (controller.formKey.value.currentState!.validate()) {
+                      controller.createAccount();
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -211,11 +230,9 @@ buildBottomSheet(BuildContext context, InformationScreenController controller) {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           IconButton(
-                              onPressed: () => controller.pickFile(source: ImageSource.camera),
-                              icon: const Icon(
-                                Icons.camera_alt,
-                                size: 32,
-                              )),
+                              onPressed: () => controller.pickFile(
+                                  source: ImageSource.camera),
+                              icon: const Icon(Icons.camera_alt, size: 32)),
                           Padding(
                             padding: const EdgeInsets.only(top: 3),
                             child: Text(
@@ -233,7 +250,8 @@ buildBottomSheet(BuildContext context, InformationScreenController controller) {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           IconButton(
-                              onPressed: () => controller.pickFile(source: ImageSource.gallery),
+                              onPressed: () => controller.pickFile(
+                                  source: ImageSource.gallery),
                               icon: const Icon(
                                 Icons.photo_library_sharp,
                                 size: 32,
